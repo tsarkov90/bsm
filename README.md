@@ -1,5 +1,11 @@
 # Black Scholes Calculator
-Black Scholes Model for Option Pricings
-Used `pyqt5`, `scipy`, `pyinstaller`
+Based on Black Scholes Model for pricing options
 
-For desktop verison run in console `pyinstaller --onefile -w app.py`. In `dist` directory will be executable file.
+Calculates the price of call and put options based on stocks (including those with dividend payments).
+Also calculates the "Greeks".
+
+Requires the modules `scipy`, `pyqt5` and `pyinstaller`. 
+To install them, enter the command `pip install scipy pyqt5 pyinstaller` in the cmd (Windows) or Terminal (Linux, Mac OS)
+Run `app.py`
+
+For desktop version, go to this directory and enter the command `pyinstaller --onefile -w app.py`
