@@ -139,21 +139,18 @@ class Ui_MainWindow(object):
         self.inputsLayout.addWidget(self.spotLabel)
 
         self.spotPrice = QtWidgets.QLineEdit(self.verticalLayoutWidget_2)
-        self.spotPrice.setValidator(QtGui.QDoubleValidator(-100000.0, 100000.0, 6))
         self.inputsLayout.addWidget(self.spotPrice)
 
         self.strikeLabel = QtWidgets.QLabel(self.verticalLayoutWidget_2)
         self.inputsLayout.addWidget(self.strikeLabel)
 
         self.strikePrice = QtWidgets.QLineEdit(self.verticalLayoutWidget_2)
-        self.strikePrice.setValidator(QtGui.QDoubleValidator(-100000.0, 100000.0, 6))
         self.inputsLayout.addWidget(self.strikePrice)
 
         self.riskLabel = QtWidgets.QLabel(self.verticalLayoutWidget_2)
         self.inputsLayout.addWidget(self.riskLabel)
 
         self.riskFreeRate = QtWidgets.QLineEdit(self.verticalLayoutWidget_2)
-        self.riskFreeRate.setValidator(QtGui.QDoubleValidator(0.0, 100.0, 6))
         self.inputsLayout.addWidget(self.riskFreeRate)
 
         self.startLabel = QtWidgets.QLabel(self.verticalLayoutWidget_2)
@@ -176,7 +173,6 @@ class Ui_MainWindow(object):
         self.inputsLayout.addWidget(self.volLabel)
 
         self.volatility = QtWidgets.QLineEdit(self.verticalLayoutWidget_2)
-        self.volatility.setValidator(QtGui.QDoubleValidator(0.0, 100.0, 6))
         self.inputsLayout.addWidget(self.volatility)
 
         self.infoText = QtWidgets.QTextBrowser(self.centralwidget)
@@ -239,7 +235,6 @@ class Ui_MainWindow(object):
         self.gridLayout.addWidget(self.label_2, 0, 0, 1, 1)
 
         self.divPayment = QtWidgets.QLineEdit(self.gridLayoutWidget_2)
-        self.divPayment.setValidator(QtGui.QDoubleValidator(-100000.0, 100000.0, 6))
         self.gridLayout.addWidget(self.divPayment, 1, 0, 1, 1)
 
         self.divDate = QtWidgets.QDateEdit(self.gridLayoutWidget_2)

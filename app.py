@@ -27,14 +27,14 @@ class mywindow(QtWidgets.QMainWindow):
     def calculateButtonClicked(self):
         self.info_text = ''
         try:
-            self.spot_price = float(self.ui.spotPrice.text().replace(',', '.'))
+            self.spot_price = float(eval(self.ui.spotPrice.text().replace(',', '.')))
             self.info_text += f"Spot Price: {self.spot_price}\n"
         except:
             self.info_text += "Enter the spot price...\n"
 
         try:
-            self.strike_price = float(
-                self.ui.strikePrice.text().replace(',', '.'))
+            self.strike_price = float(eval
+                (self.ui.strikePrice.text().replace(',', '.')))
             self.info_text += f"Strike Price: {self.strike_price}\n"
         except:
             self.info_text += "Enter the strike price...\n"
@@ -91,7 +91,7 @@ class mywindow(QtWidgets.QMainWindow):
         div_pay, div_time = '', ''
         self.info_text = ''
         try:
-            div_pay = float(self.ui.divPayment.text().replace(',', '.'))
+            div_pay = float(eval(self.ui.divPayment.text().replace(',', '.')))
         except:
             self.info_text += "Check divident payments\n"
 
