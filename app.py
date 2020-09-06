@@ -116,7 +116,7 @@ class mywindow(QtWidgets.QMainWindow):
             datetime.datetime.strptime(words[2], '%d.%m.%Y').date())
 
     def divDeleteButtonClicked(self):
-        div_pay = float(self.ui.divPayment.text().replace(',', '.'))
+        div_pay = float(eval(self.ui.divPayment.text().replace(',', '.')))
         div_time = days_to_date(
             self.ui.startDate.text(), self.ui.divDate.text())
 
