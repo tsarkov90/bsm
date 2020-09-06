@@ -41,7 +41,7 @@ class mywindow(QtWidgets.QMainWindow):
 
         try:
             self.risk_rate = float(self.ui.riskFreeRate.text().replace(',', '.'))
-            self.info_text += f"Spot Price: {self.risk_rate}\n"
+            self.info_text += f"Risk-free rate: {self.risk_rate}%\n"
         except:
             self.info_text += "Enter the risk-free rate...\n"
 
@@ -135,7 +135,7 @@ class mywindow(QtWidgets.QMainWindow):
     def divAllDeleteButtonClicked(self):
         self.dividends = []
         self.ui.divBox.clear()
-        self.ui.infoText.setText("All dividend payments has removed")
+        self.ui.infoText.setText("All dividend payments has been removed")
 
 
 def days_to_date(date_str1, date_str2):

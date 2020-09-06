@@ -11,202 +11,130 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import datetime
 
-
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
-        MainWindow.setFixedSize(690, 350)
+        MainWindow.setObjectName("MainWindow")
+        MainWindow.setFixedSize(730, 400)
 
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setEnabled(True)
 
         self.gridLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.gridLayoutWidget.setGeometry(QtCore.QRect(460, 10, 210, 260))
+        self.gridLayoutWidget.setGeometry(QtCore.QRect(480, 40, 230, 250))
 
         self.calcLayout = QtWidgets.QGridLayout(self.gridLayoutWidget)
         self.calcLayout.setContentsMargins(0, 0, 0, 0)
+        
+        self.putRho = QtWidgets.QLineEdit(self.gridLayoutWidget)
+        self.putRho.setAlignment(QtCore.Qt.AlignCenter)
+        self.putRho.setReadOnly(True)
+        self.calcLayout.addWidget(self.putRho, 5, 2, 1, 1)
 
-        self.callDelta = QtWidgets.QLineEdit(self.gridLayoutWidget)
-        self.callDelta.setAlignment(QtCore.Qt.AlignCenter)
-        self.callDelta.setReadOnly(True)
-        self.calcLayout.addWidget(self.callDelta, 3, 1, 1, 1)
+        self.label_22 = QtWidgets.QLabel(self.gridLayoutWidget)
+        self.label_22.setAlignment(QtCore.Qt.AlignCenter)
+        self.calcLayout.addWidget(self.label_22, 6, 0, 1, 1)
 
-        self.label_20 = QtWidgets.QLabel(self.gridLayoutWidget)
-        self.label_20.setAlignment(QtCore.Qt.AlignCenter)
-        self.calcLayout.addWidget(self.label_20, 3, 0, 1, 1)
+        self.label_15 = QtWidgets.QLabel(self.gridLayoutWidget)
+        self.label_15.setAlignment(QtCore.Qt.AlignCenter)
+        self.calcLayout.addWidget(self.label_15, 0, 1, 1, 1)
+
+        self.label_24 = QtWidgets.QLabel(self.gridLayoutWidget)
+        self.label_24.setAlignment(QtCore.Qt.AlignCenter)
+        self.calcLayout.addWidget(self.label_24, 8, 0, 1, 1)
+
+        self.label_23 = QtWidgets.QLabel(self.gridLayoutWidget)
+        self.label_23.setAlignment(QtCore.Qt.AlignCenter)
+        self.calcLayout.addWidget(self.label_23, 7, 0, 1, 1)
+
+        self.label_17 = QtWidgets.QLabel(self.gridLayoutWidget)
+        self.label_17.setAlignment(QtCore.Qt.AlignCenter)
+        self.calcLayout.addWidget(self.label_17, 4, 0, 1, 1)
 
         self.callPrice = QtWidgets.QLineEdit(self.gridLayoutWidget)
         self.callPrice.setAlignment(QtCore.Qt.AlignCenter)
         self.callPrice.setReadOnly(True)
-        self.calcLayout.addWidget(self.callPrice, 2, 1, 1, 1)
-
-        self.label_23 = QtWidgets.QLabel(self.gridLayoutWidget)
-        self.label_23.setAlignment(QtCore.Qt.AlignCenter)
-        self.calcLayout.addWidget(self.label_23, 8, 0, 1, 1)
-
-        self.label_24 = QtWidgets.QLabel(self.gridLayoutWidget)
-        self.label_24.setAlignment(QtCore.Qt.AlignCenter)
-        self.calcLayout.addWidget(self.label_24, 9, 0, 1, 1)
-
-        self.label_22 = QtWidgets.QLabel(self.gridLayoutWidget)
-        self.label_22.setAlignment(QtCore.Qt.AlignCenter)
-        self.calcLayout.addWidget(self.label_22, 7, 0, 1, 1)
-
-        self.vega = QtWidgets.QLineEdit(self.gridLayoutWidget)
-        self.vega.setAlignment(QtCore.Qt.AlignCenter)
-        self.vega.setReadOnly(True)
-        self.calcLayout.addWidget(self.vega, 5, 1, 1, 2)
-
-        self.callTheta = QtWidgets.QLineEdit(self.gridLayoutWidget)
-        self.callTheta.setAlignment(QtCore.Qt.AlignCenter)
-        self.callTheta.setReadOnly(True)
-        self.calcLayout.addWidget(self.callTheta, 7, 1, 1, 1)
-
-        self.label_14 = QtWidgets.QLabel(self.gridLayoutWidget)
-        self.label_14.setAlignment(QtCore.Qt.AlignCenter)
-        self.calcLayout.addWidget(self.label_14, 1, 0, 1, 1)
-
-        self.putRho = QtWidgets.QLineEdit(self.gridLayoutWidget)
-        self.putRho.setAlignment(QtCore.Qt.AlignCenter)
-        self.putRho.setReadOnly(True)
-        self.calcLayout.addWidget(self.putRho, 6, 2, 1, 1)
-
-        self.label_16 = QtWidgets.QLabel(self.gridLayoutWidget)
-        self.label_16.setAlignment(QtCore.Qt.AlignCenter)
-        self.calcLayout.addWidget(self.label_16, 1, 2, 1, 1)
-
-        self.label_21 = QtWidgets.QLabel(self.gridLayoutWidget)
-        self.label_21.setAlignment(QtCore.Qt.AlignCenter)
-        self.calcLayout.addWidget(self.label_21, 6, 0, 1, 1)
-
-        self.label_19 = QtWidgets.QLabel(self.gridLayoutWidget)
-        self.label_19.setAlignment(QtCore.Qt.AlignCenter)
-        self.calcLayout.addWidget(self.label_19, 4, 0, 1, 1)
-
-        self.label_15 = QtWidgets.QLabel(self.gridLayoutWidget)
-        self.label_15.setAlignment(QtCore.Qt.AlignCenter)
-        self.calcLayout.addWidget(self.label_15, 1, 1, 1, 1)
-
-        self.gamma = QtWidgets.QLineEdit(self.gridLayoutWidget)
-        self.gamma.setAlignment(QtCore.Qt.AlignCenter)
-        self.gamma.setReadOnly(True)
-        self.calcLayout.addWidget(self.gamma, 4, 1, 1, 2)
-
-        self.putPrice = QtWidgets.QLineEdit(self.gridLayoutWidget)
-        self.putPrice.setAlignment(QtCore.Qt.AlignCenter)
-        self.putPrice.setReadOnly(True)
-        self.calcLayout.addWidget(self.putPrice, 2, 2, 1, 1)
-
-        self.d2 = QtWidgets.QLineEdit(self.gridLayoutWidget)
-        self.d2.setAlignment(QtCore.Qt.AlignCenter)
-        self.d2.setReadOnly(True)
-        self.calcLayout.addWidget(self.d2, 9, 1, 1, 2)
+        self.calcLayout.addWidget(self.callPrice, 1, 1, 1, 1)
 
         self.d1 = QtWidgets.QLineEdit(self.gridLayoutWidget)
         self.d1.setAlignment(QtCore.Qt.AlignCenter)
         self.d1.setReadOnly(True)
-        self.calcLayout.addWidget(self.d1, 8, 1, 1, 2)
+        self.calcLayout.addWidget(self.d1, 7, 1, 1, 2)
 
-        self.putDelta = QtWidgets.QLineEdit(self.gridLayoutWidget)
-        self.putDelta.setAlignment(QtCore.Qt.AlignCenter)
-        self.putDelta.setReadOnly(True)
-        self.calcLayout.addWidget(self.putDelta, 3, 2, 1, 1)
+        self.label_19 = QtWidgets.QLabel(self.gridLayoutWidget)
+        self.label_19.setAlignment(QtCore.Qt.AlignCenter)
+        self.calcLayout.addWidget(self.label_19, 3, 0, 1, 1)
 
-        self.label_18 = QtWidgets.QLabel(self.gridLayoutWidget)
-        self.label_18.setAlignment(QtCore.Qt.AlignCenter)
-        self.calcLayout.addWidget(self.label_18, 2, 0, 1, 1)
+        self.label_16 = QtWidgets.QLabel(self.gridLayoutWidget)
+        self.label_16.setAlignment(QtCore.Qt.AlignCenter)
+        self.calcLayout.addWidget(self.label_16, 0, 2, 1, 1)
 
-        self.label_17 = QtWidgets.QLabel(self.gridLayoutWidget)
-        self.label_17.setAlignment(QtCore.Qt.AlignCenter)
-        self.calcLayout.addWidget(self.label_17, 5, 0, 1, 1)
+        self.callTheta = QtWidgets.QLineEdit(self.gridLayoutWidget)
+        self.callTheta.setAlignment(QtCore.Qt.AlignCenter)
+        self.callTheta.setReadOnly(True)
+        self.calcLayout.addWidget(self.callTheta, 6, 1, 1, 1)
 
-        self.calculationsHead = QtWidgets.QLabel(self.gridLayoutWidget)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.calculationsHead.sizePolicy().hasHeightForWidth())
-        self.calculationsHead.setSizePolicy(sizePolicy)
-        font = QtGui.QFont()
-        font.setPointSize(10)
-        font.setBold(True)
-        font.setWeight(75)
-        self.calculationsHead.setFont(font)
-        self.calcLayout.addWidget(self.calculationsHead, 0, 0, 1, 3)
+        self.callDelta = QtWidgets.QLineEdit(self.gridLayoutWidget)
+        self.callDelta.setAlignment(QtCore.Qt.AlignCenter)
+        self.callDelta.setReadOnly(True)
+        self.calcLayout.addWidget(self.callDelta, 2, 1, 1, 1)
+
+        self.label_21 = QtWidgets.QLabel(self.gridLayoutWidget)
+        self.label_21.setAlignment(QtCore.Qt.AlignCenter)
+        self.calcLayout.addWidget(self.label_21, 5, 0, 1, 1)
+
+        self.gamma = QtWidgets.QLineEdit(self.gridLayoutWidget)
+        self.gamma.setAlignment(QtCore.Qt.AlignCenter)
+        self.gamma.setReadOnly(True)
+        self.calcLayout.addWidget(self.gamma, 3, 1, 1, 2)
 
         self.putTheta = QtWidgets.QLineEdit(self.gridLayoutWidget)
         self.putTheta.setAlignment(QtCore.Qt.AlignCenter)
         self.putTheta.setReadOnly(True)
-        self.calcLayout.addWidget(self.putTheta, 7, 2, 1, 1)
+        self.calcLayout.addWidget(self.putTheta, 6, 2, 1, 1)
+
+        self.vega = QtWidgets.QLineEdit(self.gridLayoutWidget)
+        self.vega.setAlignment(QtCore.Qt.AlignCenter)
+        self.vega.setReadOnly(True)
+        self.calcLayout.addWidget(self.vega, 4, 1, 1, 2)
+
+        self.d2 = QtWidgets.QLineEdit(self.gridLayoutWidget)
+        self.d2.setAlignment(QtCore.Qt.AlignCenter)
+        self.d2.setReadOnly(True)
+        self.calcLayout.addWidget(self.d2, 8, 1, 1, 2)
+
+        self.label_18 = QtWidgets.QLabel(self.gridLayoutWidget)
+        self.label_18.setAlignment(QtCore.Qt.AlignCenter)
+        self.calcLayout.addWidget(self.label_18, 1, 0, 1, 1)
+
+        self.label_14 = QtWidgets.QLabel(self.gridLayoutWidget)
+        self.label_14.setAlignment(QtCore.Qt.AlignCenter)
+        self.calcLayout.addWidget(self.label_14, 0, 0, 1, 1)
+
+        self.putDelta = QtWidgets.QLineEdit(self.gridLayoutWidget)
+        self.putDelta.setAlignment(QtCore.Qt.AlignCenter)
+        self.putDelta.setReadOnly(True)
+        self.calcLayout.addWidget(self.putDelta, 2, 2, 1, 1)
+
+        self.label_20 = QtWidgets.QLabel(self.gridLayoutWidget)
+        self.label_20.setAlignment(QtCore.Qt.AlignCenter)
+        self.calcLayout.addWidget(self.label_20, 2, 0, 1, 1)
+
+        self.putPrice = QtWidgets.QLineEdit(self.gridLayoutWidget)
+        self.putPrice.setAlignment(QtCore.Qt.AlignCenter)
+        self.putPrice.setReadOnly(True)
+        self.calcLayout.addWidget(self.putPrice, 1, 2, 1, 1)
 
         self.callRho = QtWidgets.QLineEdit(self.gridLayoutWidget)
         self.callRho.setAlignment(QtCore.Qt.AlignCenter)
         self.callRho.setReadOnly(True)
-        self.calcLayout.addWidget(self.callRho, 6, 1, 1, 1)
-
-        self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(20, 10, 231, 181))
-
-        self.divLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
-        self.divLayout.setContentsMargins(0, 0, 0, 0)
-
-        self.divHead = QtWidgets.QLabel(self.verticalLayoutWidget)
-        font = QtGui.QFont()
-        font.setPointSize(10)
-        font.setBold(True)
-        font.setWeight(75)
-        self.divHead.setFont(font)
-        self.divLayout.addWidget(self.divHead)
-
-        self.divBox = QtWidgets.QComboBox(self.verticalLayoutWidget)
-        self.divLayout.addWidget(self.divBox)
-
-        self.divWidget = QtWidgets.QWidget(self.verticalLayoutWidget)
-
-        self.gridLayout_4 = QtWidgets.QGridLayout(self.divWidget)
-
-        self.divDate = QtWidgets.QDateEdit(self.divWidget)
-        self.divDate.setCalendarPopup(True)
-        self.divDate.setDate(datetime.date.today())
-        self.gridLayout_4.addWidget(self.divDate, 1, 1, 1, 2)
-
-        self.label_2 = QtWidgets.QLabel(self.divWidget)
-        self.gridLayout_4.addWidget(self.label_2, 0, 0, 1, 1)
-
-        self.divPayment = QtWidgets.QLineEdit(self.divWidget)
-        self.gridLayout_4.addWidget(self.divPayment, 1, 0, 1, 1)
-
-        self.label_4 = QtWidgets.QLabel(self.divWidget)
-        self.gridLayout_4.addWidget(self.label_4, 0, 1, 1, 1)
-
-        self.divDeleteButton = QtWidgets.QPushButton(self.divWidget)
-        self.gridLayout_4.addWidget(self.divDeleteButton, 0, 2, 1, 1)
-
-        self.divAddButton = QtWidgets.QPushButton(self.divWidget)
-        self.gridLayout_4.addWidget(self.divAddButton, 2, 0, 1, 3)
-
-        self.divLayout.addWidget(self.divWidget)
-
-        self.divAllDeleteButton = QtWidgets.QPushButton(self.verticalLayoutWidget)
-        self.divLayout.addWidget(self.divAllDeleteButton)
+        self.calcLayout.addWidget(self.callRho, 5, 1, 1, 1)
 
         self.verticalLayoutWidget_2 = QtWidgets.QWidget(self.centralwidget)
-        self.verticalLayoutWidget_2.setGeometry(QtCore.QRect(270, 10, 170, 320))
+        self.verticalLayoutWidget_2.setGeometry(QtCore.QRect(270, 40, 190, 300))
 
         self.inputsLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget_2)
         self.inputsLayout.setContentsMargins(0, 0, 0, 0)
-
-        self.inputsHead = QtWidgets.QLabel(self.verticalLayoutWidget_2)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.inputsHead.sizePolicy().hasHeightForWidth())
-        self.inputsHead.setSizePolicy(sizePolicy)
-        font = QtGui.QFont()
-        font.setPointSize(10)
-        font.setBold(True)
-        font.setWeight(75)
-        self.inputsHead.setFont(font)
-        self.inputsLayout.addWidget(self.inputsHead)
-
+        
         self.spotLabel = QtWidgets.QLabel(self.verticalLayoutWidget_2)
         self.inputsLayout.addWidget(self.spotLabel)
 
@@ -251,22 +179,77 @@ class Ui_MainWindow(object):
         self.volatility.setValidator(QtGui.QDoubleValidator(0.0, 100.0, 6))
         self.inputsLayout.addWidget(self.volatility)
 
-        self.calculateButton = QtWidgets.QPushButton(self.verticalLayoutWidget_2)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.calculateButton.sizePolicy().hasHeightForWidth())
-        self.calculateButton.setSizePolicy(sizePolicy)
-        self.inputsLayout.addWidget(self.calculateButton)
-
         self.infoText = QtWidgets.QTextBrowser(self.centralwidget)
-        self.infoText.setGeometry(QtCore.QRect(20, 210, 230, 120))
-        self.infoText.setReadOnly(True)
+        self.infoText.setGeometry(QtCore.QRect(20, 220, 230, 160))
+        # self.infoText.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        # self.infoText.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
 
-        self.about1 = QtWidgets.QLabel(self.centralwidget)
-        self.about1.setGeometry(QtCore.QRect(460, 295, 210, 20))
-        self.about1.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
+        self.about = QtWidgets.QLabel(self.centralwidget)
+        self.about.setGeometry(QtCore.QRect(480, 320, 230, 20))
+        self.about.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
 
+        self.divHead = QtWidgets.QLabel(self.centralwidget)
+        self.divHead.setGeometry(QtCore.QRect(20, 10, 230, 30))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.divHead.setFont(font)
+        
+        self.inputsHead = QtWidgets.QLabel(self.centralwidget)
+        self.inputsHead.setGeometry(QtCore.QRect(270, 10, 190, 30))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.inputsHead.setFont(font)
+        
+        self.calculationsHead = QtWidgets.QLabel(self.centralwidget)
+        self.calculationsHead.setGeometry(QtCore.QRect(489, 10, 220, 30))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        font.setStyleStrategy(QtGui.QFont.PreferDefault)
+        self.calculationsHead.setFont(font)
+        
+        self.calculateButton = QtWidgets.QPushButton(self.centralwidget)
+        self.calculateButton.setGeometry(QtCore.QRect(270, 350, 190, 30))
+        
+        self.divAllDeleteButton = QtWidgets.QPushButton(self.centralwidget)
+        self.divAllDeleteButton.setGeometry(QtCore.QRect(20, 180, 231, 24))
+        
+        self.gridLayoutWidget_2 = QtWidgets.QWidget(self.centralwidget)
+        self.gridLayoutWidget_2.setGeometry(QtCore.QRect(20, 80, 231, 91))
+        
+        self.gridLayout = QtWidgets.QGridLayout(self.gridLayoutWidget_2)
+        self.gridLayout.setContentsMargins(0, 0, 0, 0)
+        
+        self.divDeleteButton = QtWidgets.QPushButton(self.gridLayoutWidget_2)
+        self.gridLayout.addWidget(self.divDeleteButton, 0, 2, 1, 1)
+
+        self.divAddButton = QtWidgets.QPushButton(self.gridLayoutWidget_2)
+        self.gridLayout.addWidget(self.divAddButton, 2, 0, 1, 3)
+
+        self.label_4 = QtWidgets.QLabel(self.gridLayoutWidget_2)
+        self.gridLayout.addWidget(self.label_4, 0, 1, 1, 1)
+
+        self.label_2 = QtWidgets.QLabel(self.gridLayoutWidget_2)
+        self.label_2.setObjectName("label_2")
+        self.gridLayout.addWidget(self.label_2, 0, 0, 1, 1)
+
+        self.divPayment = QtWidgets.QLineEdit(self.gridLayoutWidget_2)
+        self.divPayment.setValidator(QtGui.QDoubleValidator(-100000.0, 100000.0, 6))
+        self.gridLayout.addWidget(self.divPayment, 1, 0, 1, 1)
+
+        self.divDate = QtWidgets.QDateEdit(self.gridLayoutWidget_2)
+        self.divDate.setCalendarPopup(True)
+        self.divDate.setDate(datetime.date.today() + datetime.timedelta(days=1))
+        self.gridLayout.addWidget(self.divDate, 1, 1, 1, 2)
+
+        self.divBox = QtWidgets.QComboBox(self.centralwidget)
+        self.divBox.setGeometry(QtCore.QRect(20, 40, 230, 25))
+        
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
@@ -274,27 +257,18 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "Black Scholes Option Calculator (TEST VERSION)"))
-        self.label_20.setText(_translate("MainWindow", "Delta, Δ"))
-        self.label_23.setText(_translate("MainWindow", "d1"))
-        self.label_24.setText(_translate("MainWindow", "d2"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Black Scholes Option Calculator"))
         self.label_22.setText(_translate("MainWindow", "Theta, Θ"))
-        self.label_14.setText(_translate("MainWindow", "Option"))
+        self.label_15.setText(_translate("MainWindow", "Call"))
+        self.label_24.setText(_translate("MainWindow", "d2"))
+        self.label_23.setText(_translate("MainWindow", "d1"))
+        self.label_17.setText(_translate("MainWindow", "Vega, v"))
+        self.label_19.setText(_translate("MainWindow", "Gamma, Γ"))
         self.label_16.setText(_translate("MainWindow", "Put"))
         self.label_21.setText(_translate("MainWindow", "Rho, ρ"))
-        self.label_19.setText(_translate("MainWindow", "Gamma, Γ"))
-        self.label_15.setText(_translate("MainWindow", "Call"))
         self.label_18.setText(_translate("MainWindow", "Price"))
-        self.label_17.setText(_translate("MainWindow", "Vega, v"))
-        self.calculationsHead.setText(_translate("MainWindow", "Calculations"))
-        self.divHead.setText(_translate("MainWindow", "Dividend payments"))
-        self.label_2.setText(_translate("MainWindow", "Edit / Add payment"))
-        self.divPayment.setPlaceholderText(_translate("MainWindow", "$1,52"))
-        self.label_4.setText(_translate("MainWindow", "Date"))
-        self.divDeleteButton.setText(_translate("MainWindow", "Delete"))
-        self.divAddButton.setText(_translate("MainWindow", "Add new payment"))
-        self.divAllDeleteButton.setText(_translate("MainWindow", "Delete all dividend payments"))
-        self.inputsHead.setText(_translate("MainWindow", "Inputs"))
+        self.label_14.setText(_translate("MainWindow", "Option"))
+        self.label_20.setText(_translate("MainWindow", "Delta, Δ"))
         self.spotLabel.setText(_translate("MainWindow", "Spot Price, S"))
         self.spotPrice.setPlaceholderText(_translate("MainWindow", "$25,00"))
         self.strikeLabel.setText(_translate("MainWindow", "Strike Price, K"))
@@ -305,6 +279,15 @@ class Ui_MainWindow(object):
         self.expLabel.setText(_translate("MainWindow", "Expiration Date, T"))
         self.volLabel.setText(_translate("MainWindow", "Volatility, σ"))
         self.volatility.setPlaceholderText(_translate("MainWindow", "26,07%"))
-        self.calculateButton.setText(_translate("MainWindow", "Calculate"))
         self.infoText.setPlaceholderText(_translate("MainWindow", "Info about option..."))
-        self.about1.setText(_translate("MainWindow", "github.com/tsarkov90"))
+        self.about.setText(_translate("MainWindow", "github.com/tsarkov90"))
+        self.divHead.setText(_translate("MainWindow", "Dividend payments"))
+        self.inputsHead.setText(_translate("MainWindow", "Inputs"))
+        self.calculationsHead.setText(_translate("MainWindow", "Calculations"))
+        self.calculateButton.setText(_translate("MainWindow", "Calculate"))
+        self.divAllDeleteButton.setText(_translate("MainWindow", "Delete all dividend payments"))
+        self.divDeleteButton.setText(_translate("MainWindow", "Delete"))
+        self.divAddButton.setText(_translate("MainWindow", "Add new payment"))
+        self.label_4.setText(_translate("MainWindow", "Date"))
+        self.label_2.setText(_translate("MainWindow", "Edit / Add payment"))
+        self.divPayment.setPlaceholderText(_translate("MainWindow", "$1,52"))

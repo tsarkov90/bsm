@@ -11,7 +11,7 @@ except ImportError:
 class BS:
     '''
     Black Scholes Model
-    Used for pricing European options on stocks (including with dividends)
+    Used for pricing European otions on stocks (including with dividends)
     '''
     def __init__(self, args, sigma, dividends=None):
         self.S = args[0]
