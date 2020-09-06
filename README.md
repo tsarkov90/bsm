@@ -1,4 +1,4 @@
-# bsm
+# Black Scholes Calculator
 Black Scholes Model for Option Pricings
 Used `pyqt5`, `scipy`, `pyinstaller`
 
