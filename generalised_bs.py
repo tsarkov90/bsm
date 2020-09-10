@@ -16,7 +16,7 @@ class BS:
         # if underlying_type = 'currency': div_yield = foreign risk-free rate
         # if underlying_type = 'index' : div_yield
         # if underlying_type = 'future': div_yiled = None
-        # if underlying_type = 'equity': check if dividends not None
+        # if underlying_type = 'equity': check if dividends is not None
 
         self.S = spot_price
         self.K = strike_price
@@ -132,64 +132,4 @@ class BS:
     def _gamma(self):
         '''Returns the option gamma'''
         return self.pv_div * norm.pdf(self.d1) / (self.S * self.sigma_root_T / self.pv_div)
-
-
-# # equity (RIGHT)
-# stock_price = 15765  # S
-# volatility = 31.84  # sigma
-# risk_free_rate = 4.25  # r
-
-# life = 1 * 365  # T
-# strike_price = 16000  # K
-
-# bs = BS(stock_price, strike_price, risk_free_rate, life, volatility)
-# print(bs.call_price, bs.put_price)
-
-# # equity with dividends (RIGHT)
-# stock_price = 15765
-# volatility = 31.84
-# risk_free_rate = 4.25
-
-# life = 1 * 365
-# strike_price = 16000
-
-# dividends = [[100, 0.25*365],
-#              [125, 0.5*365],
-#              [150, 0.75*365]]
-
-# bs = BS(stock_price, strike_price, risk_free_rate,
-#         life, volatility, dividends=dividends)
-# print(bs.call_price, bs.put_price)
-
-# # currency (RIGHT)
-# exchange_rate = 15765
-# volatility = 31.84
-# risk_free_rate = 4.25
-# foreign_risk_free_rate = 5
-# life = 1 * 365
-# strike_price = 16000
-
-# bs = BS(exchange_rate, strike_price, risk_free_rate, life, volatility, div_yield=foreign_risk_free_rate)
-# print(bs.call_price, bs.put_price)
-
-# # index (RIGHT)
-# index_level = 15765
-# volatility = 31.84
-# risk_free_rate = 4.25
-# dividend_yield = 5
-# life = 1 * 365
-# strike_price = 16000
-
-# bs = BS(index_level, strike_price, risk_free_rate, life, volatility, div_yield=dividend_yield)
-# print(bs.call_price, bs.put_price)
-
-# future
-# futures_price = 15765
-# volatility = 31.84
-# risk_free_rate = 4.25
-
-# life = 1 * 365
-# strike_price = 16000
-
-# bs = BS(futures_price, strike_price, risk_free_rate, life, volatility, is_fut=True)
-# print(bs.call_price, bs.put_price)
+    
