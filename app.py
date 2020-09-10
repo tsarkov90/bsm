@@ -2,7 +2,7 @@ from PyQt5 import QtWidgets
 from mydesign import Ui_MainWindow
 import sys
 import datetime
-from bs import BS
+from generalised_bs import BS
 
 
 class mywindow(QtWidgets.QMainWindow):
@@ -15,41 +15,51 @@ class mywindow(QtWidgets.QMainWindow):
             self.__dict__[i] = ''
 
         self.dividends = []
-        self.info_text = ''
 
         self.ui.calculateButton.clicked.connect(self.calculateButtonClicked)
         self.ui.divAddButton.clicked.connect(self.divAddButtonClicked)
-        self.ui.divBox.activated[str].connect(self.onActivated)
+        self.ui.divBox.activated[str].connect(self.divOnActivated)
         self.ui.divDeleteButton.clicked.connect(self.divDeleteButtonClicked)
         self.ui.divAllDeleteButton.clicked.connect(
             self.divAllDeleteButtonClicked)
+        self.ui.undTypeBox.activated[str].connect(self.undActivated)
+
+        self.ui.divYieldLabel.setDisabled(True)
+        self.ui.divYield.setDisabled(True)
 
     def calculateButtonClicked(self):
         self.info_text = ''
-        try:
-            self.spot_price = float(eval(self.ui.spotPrice.text().replace(',', '.')))
-            self.info_text += f"Spot Price: {self.spot_price}\n"
-        except:
-            self.info_text += "Enter the spot price...\n"
 
-        try:
-            self.strike_price = float(eval
-                (self.ui.strikePrice.text().replace(',', '.')))
-            self.info_text += f"Strike Price: {self.strike_price}\n"
-        except:
-            self.info_text += "Enter the strike price...\n"
+        self.underlying_type = self.ui.undTypeBox.currentText()
+        self.info_text += f"Underlying Type: {self.underlying_type}\n"
 
-        try:
-            self.risk_rate = float(self.ui.riskFreeRate.text().replace(',', '.'))
-            self.info_text += f"Risk-free rate: {self.risk_rate}%\n"
-        except:
-            self.info_text += "Enter the risk-free rate...\n"
+        self.spot_price, self.info_text = valid_input(
+            self.ui.spotLabel, self.ui.spotPrice, self.info_text
+        )
 
-        try:
-            self.sigma = float(self.ui.volatility.text().replace(',', '.'))
-            self.info_text += f"Volatility: {self.sigma}%\n"
-        except:
-            self.info_text += "Enter the volatility...\n"
+        self.strike_price, self.info_text = valid_input(
+            self.ui.strikeLabel, self.ui.strikePrice, self.info_text
+        )
+
+        # try:
+        #     self.strike_price = float(eval
+        #                               (self.ui.strikePrice.text().replace(',', '.')))
+        #     self.info_text += f"Strike Price: {self.strike_price}\n"
+        # except:
+        #     self.info_text += "Enter the strike price...\n"
+
+        self.risk_free_rate, self.info_text = valid_input(
+            self.ui.riskFreeRateLabel, self.ui.riskFreeRate, self.info_text
+        )
+
+        if self.underlying_type in ['Currency', 'Index']:
+            self.dividend_yield, self.info_text = valid_input(
+                self.ui.divYieldLabel, self.ui.divYield, self.info_text
+            )
+
+        self.volatility, self.info_text = valid_input(
+            self.ui.volatilityLabel, self.ui.volatility, self.info_text
+        )
 
         if days_to_date(self.ui.startDate.text(), self.ui.expDate.text()) > 0:
             self.exp_time = days_to_date(
@@ -63,11 +73,32 @@ class mywindow(QtWidgets.QMainWindow):
             self.info_text += "Including dividents payments"
 
         self.ui.infoText.setText(self.info_text)
-        if 'Enter' in self.info_text:
+        if 'CHECK' in self.info_text:
             return
 
-        bs = BS([self.spot_price, self.strike_price, self.risk_rate,
-                 self.exp_time], sigma=self.sigma, dividends=self.dividends)
+        if self.underlying_type == 'Equity':
+            bs = BS(self.spot_price,
+                    self.strike_price,
+                    self.risk_free_rate,
+                    self.exp_time,
+                    self.volatility,
+                    dividends=self.dividends)
+
+        elif self.underlying_type in ['Currency', 'Index']:
+            bs = BS(self.spot_price,
+                    self.strike_price,
+                    self.risk_free_rate,
+                    self.exp_time,
+                    self.volatility,
+                    div_yield=self.dividend_yield)
+
+        else:
+            bs = BS(self.spot_price,
+                    self.strike_price,
+                    self.risk_free_rate,
+                    self.exp_time,
+                    self.volatility,
+                    is_fut=True)
 
         self.ui.callPrice.setText(str(round(bs.call_price, 6)))
         self.ui.putPrice.setText(str(round(bs.put_price, 6)))
@@ -109,11 +140,66 @@ class mywindow(QtWidgets.QMainWindow):
 
         self.ui.infoText.setText(self.info_text)
 
-    def onActivated(self, text):
+    def divOnActivated(self, text):
         words = text.split(' ')
         self.ui.divPayment.setText(words[0])
         self.ui.divDate.setDate(
             datetime.datetime.strptime(words[2], '%d.%m.%Y').date())
+
+    def undActivated(self, text):
+        if text != 'Equity':
+            self.ui.divHead.setDisabled(True)
+            self.ui.divBox.setDisabled(True)
+            self.ui.label_2.setDisabled(True)
+            self.ui.label_4.setDisabled(True)
+            self.ui.divPayment.setDisabled(True)
+            self.ui.divDate.setDisabled(True)
+            self.ui.divAddButton.setDisabled(True)
+            self.ui.divDeleteButton.setDisabled(True)
+            self.ui.divAllDeleteButton.setDisabled(True)
+
+            self.dividends = []
+            self.ui.divBox.clear()
+            self.ui.infoText.setText(
+                "All dividend payments has been removed with changing of underlying type")
+        else:
+            self.ui.divHead.setEnabled(True)
+            self.ui.divBox.setEnabled(True)
+            self.ui.label_2.setEnabled(True)
+            self.ui.label_4.setEnabled(True)
+            self.ui.divPayment.setEnabled(True)
+            self.ui.divDate.setEnabled(True)
+            self.ui.divAddButton.setEnabled(True)
+            self.ui.divDeleteButton.setEnabled(True)
+            self.ui.divAllDeleteButton.setEnabled(True)
+
+        if text == 'Equity':
+            self.ui.spotLabel.setText('Spot Price, S')
+            self.ui.divYieldLabel.setText('Dividend Yield, q')
+
+            self.ui.divYieldLabel.setDisabled(True)
+            self.ui.divYield.setDisabled(True)
+
+        elif text == 'Currency':
+            self.ui.spotLabel.setText('Exchange Rate, S')
+            self.ui.divYieldLabel.setText('Foreign Risk-free Rate, r_f')
+
+            self.ui.divYieldLabel.setEnabled(True)
+            self.ui.divYield.setEnabled(True)
+
+        elif text == 'Index':
+            self.ui.spotLabel.setText('Index Level, S')
+            self.ui.divYieldLabel.setText('Dividend Yield, q')
+
+            self.ui.divYieldLabel.setEnabled(True)
+            self.ui.divYield.setEnabled(True)
+
+        elif text == 'Future':
+            self.ui.spotLabel.setText('Future Price, F')
+            self.ui.divYieldLabel.setText('Dividend Yield, q')
+
+            self.ui.divYieldLabel.setDisabled(True)
+            self.ui.divYield.setDisabled(True)
 
     def divDeleteButtonClicked(self):
         div_pay = float(eval(self.ui.divPayment.text().replace(',', '.')))
@@ -144,6 +230,16 @@ def days_to_date(date_str1, date_str2):
     diff = date2 - date1
 
     return int(diff.days)
+
+
+def valid_input(inputLabel, inputEdit, info_text):
+    try:
+        var = float(eval(inputEdit.text()))
+        info_text += f"{inputLabel.text()}: {var}\n"
+        return var, info_text
+    except:
+        info_text += f"CHECK the {inputLabel.text()}\n"
+        return None, info_text
 
 
 app = QtWidgets.QApplication(sys.argv)

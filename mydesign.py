@@ -11,20 +11,21 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import datetime
 
+
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.setFixedSize(730, 400)
+        MainWindow.resize(730, 430)
 
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setEnabled(True)
 
         self.gridLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.gridLayoutWidget.setGeometry(QtCore.QRect(480, 40, 230, 250))
+        self.gridLayoutWidget.setGeometry(QtCore.QRect(480, 100, 230, 250))
 
         self.calcLayout = QtWidgets.QGridLayout(self.gridLayoutWidget)
         self.calcLayout.setContentsMargins(0, 0, 0, 0)
-        
+
         self.putRho = QtWidgets.QLineEdit(self.gridLayoutWidget)
         self.putRho.setAlignment(QtCore.Qt.AlignCenter)
         self.putRho.setReadOnly(True)
@@ -48,6 +49,7 @@ class Ui_MainWindow(object):
 
         self.label_17 = QtWidgets.QLabel(self.gridLayoutWidget)
         self.label_17.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_17.setObjectName("label_17")
         self.calcLayout.addWidget(self.label_17, 4, 0, 1, 1)
 
         self.callPrice = QtWidgets.QLineEdit(self.gridLayoutWidget)
@@ -130,11 +132,11 @@ class Ui_MainWindow(object):
         self.calcLayout.addWidget(self.callRho, 5, 1, 1, 1)
 
         self.verticalLayoutWidget_2 = QtWidgets.QWidget(self.centralwidget)
-        self.verticalLayoutWidget_2.setGeometry(QtCore.QRect(270, 40, 190, 300))
+        self.verticalLayoutWidget_2.setGeometry(QtCore.QRect(270, 40, 190, 330))
 
         self.inputsLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget_2)
         self.inputsLayout.setContentsMargins(0, 0, 0, 0)
-        
+
         self.spotLabel = QtWidgets.QLabel(self.verticalLayoutWidget_2)
         self.inputsLayout.addWidget(self.spotLabel)
 
@@ -147,11 +149,17 @@ class Ui_MainWindow(object):
         self.strikePrice = QtWidgets.QLineEdit(self.verticalLayoutWidget_2)
         self.inputsLayout.addWidget(self.strikePrice)
 
-        self.riskLabel = QtWidgets.QLabel(self.verticalLayoutWidget_2)
-        self.inputsLayout.addWidget(self.riskLabel)
+        self.riskFreeRateLabel = QtWidgets.QLabel(self.verticalLayoutWidget_2)
+        self.inputsLayout.addWidget(self.riskFreeRateLabel)
 
         self.riskFreeRate = QtWidgets.QLineEdit(self.verticalLayoutWidget_2)
         self.inputsLayout.addWidget(self.riskFreeRate)
+
+        self.divYieldLabel = QtWidgets.QLabel(self.verticalLayoutWidget_2)
+        self.inputsLayout.addWidget(self.divYieldLabel)
+
+        self.divYield = QtWidgets.QLineEdit(self.verticalLayoutWidget_2)
+        self.inputsLayout.addWidget(self.divYield)
 
         self.startLabel = QtWidgets.QLabel(self.verticalLayoutWidget_2)
         self.inputsLayout.addWidget(self.startLabel)
@@ -160,29 +168,25 @@ class Ui_MainWindow(object):
         self.startDate.setCalendarPopup(True)
         self.startDate.setDate(datetime.date.today())
         self.inputsLayout.addWidget(self.startDate)
-
+        
         self.expLabel = QtWidgets.QLabel(self.verticalLayoutWidget_2)
         self.inputsLayout.addWidget(self.expLabel)
-
+        
         self.expDate = QtWidgets.QDateEdit(self.verticalLayoutWidget_2)
         self.expDate.setCalendarPopup(True)
         self.expDate.setDate(datetime.date.today() + datetime.timedelta(days=30))
         self.inputsLayout.addWidget(self.expDate)
-
-        self.volLabel = QtWidgets.QLabel(self.verticalLayoutWidget_2)
-        self.inputsLayout.addWidget(self.volLabel)
+        
+        self.volatilityLabel = QtWidgets.QLabel(self.verticalLayoutWidget_2)
+        self.inputsLayout.addWidget(self.volatilityLabel)
 
         self.volatility = QtWidgets.QLineEdit(self.verticalLayoutWidget_2)
         self.inputsLayout.addWidget(self.volatility)
 
         self.infoText = QtWidgets.QTextBrowser(self.centralwidget)
-        self.infoText.setGeometry(QtCore.QRect(20, 220, 230, 160))
+        self.infoText.setGeometry(QtCore.QRect(20, 220, 230, 190))
         # self.infoText.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         # self.infoText.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-
-        self.about = QtWidgets.QLabel(self.centralwidget)
-        self.about.setGeometry(QtCore.QRect(480, 320, 230, 20))
-        self.about.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
 
         self.divHead = QtWidgets.QLabel(self.centralwidget)
         self.divHead.setGeometry(QtCore.QRect(20, 10, 230, 30))
@@ -199,9 +203,9 @@ class Ui_MainWindow(object):
         font.setBold(True)
         font.setWeight(75)
         self.inputsHead.setFont(font)
-        
+
         self.calculationsHead = QtWidgets.QLabel(self.centralwidget)
-        self.calculationsHead.setGeometry(QtCore.QRect(489, 10, 220, 30))
+        self.calculationsHead.setGeometry(QtCore.QRect(480, 70, 220, 30))
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(True)
@@ -210,13 +214,13 @@ class Ui_MainWindow(object):
         self.calculationsHead.setFont(font)
         
         self.calculateButton = QtWidgets.QPushButton(self.centralwidget)
-        self.calculateButton.setGeometry(QtCore.QRect(270, 350, 190, 30))
+        self.calculateButton.setGeometry(QtCore.QRect(270, 380, 190, 30))
         
         self.divAllDeleteButton = QtWidgets.QPushButton(self.centralwidget)
-        self.divAllDeleteButton.setGeometry(QtCore.QRect(20, 180, 231, 24))
+        self.divAllDeleteButton.setGeometry(QtCore.QRect(20, 180, 230, 24))
         
         self.gridLayoutWidget_2 = QtWidgets.QWidget(self.centralwidget)
-        self.gridLayoutWidget_2.setGeometry(QtCore.QRect(20, 80, 231, 91))
+        self.gridLayoutWidget_2.setGeometry(QtCore.QRect(20, 80, 230, 90))
         
         self.gridLayout = QtWidgets.QGridLayout(self.gridLayoutWidget_2)
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
@@ -231,7 +235,6 @@ class Ui_MainWindow(object):
         self.gridLayout.addWidget(self.label_4, 0, 1, 1, 1)
 
         self.label_2 = QtWidgets.QLabel(self.gridLayoutWidget_2)
-        self.label_2.setObjectName("label_2")
         self.gridLayout.addWidget(self.label_2, 0, 0, 1, 1)
 
         self.divPayment = QtWidgets.QLineEdit(self.gridLayoutWidget_2)
@@ -244,7 +247,23 @@ class Ui_MainWindow(object):
 
         self.divBox = QtWidgets.QComboBox(self.centralwidget)
         self.divBox.setGeometry(QtCore.QRect(20, 40, 230, 25))
+
+        self.undHead = QtWidgets.QLabel(self.centralwidget)
+        self.undHead.setGeometry(QtCore.QRect(480, 10, 230, 30))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.undHead.setFont(font)
         
+        self.undTypeBox = QtWidgets.QComboBox(self.centralwidget)
+        self.undTypeBox.setGeometry(QtCore.QRect(480, 40, 231, 25))
+        
+        self.undTypeBox.addItem("Equity")
+        self.undTypeBox.addItem("Currency")
+        self.undTypeBox.addItem("Index")
+        self.undTypeBox.addItem("Future")
+
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
@@ -268,14 +287,15 @@ class Ui_MainWindow(object):
         self.spotPrice.setPlaceholderText(_translate("MainWindow", "$25,00"))
         self.strikeLabel.setText(_translate("MainWindow", "Strike Price, K"))
         self.strikePrice.setPlaceholderText(_translate("MainWindow", "$30,00"))
-        self.riskLabel.setText(_translate("MainWindow", "Risk-free rate, r"))
+        self.riskFreeRateLabel.setText(_translate("MainWindow", "Risk-free Rate, r"))
         self.riskFreeRate.setPlaceholderText(_translate("MainWindow", "2,50%"))
+        self.divYieldLabel.setText(_translate("MainWindow", "Dividend Yield, q"))
+        self.divYield.setPlaceholderText(_translate("MainWindow", "2,50%"))
         self.startLabel.setText(_translate("MainWindow", "Start Date, t"))
         self.expLabel.setText(_translate("MainWindow", "Expiration Date, T"))
-        self.volLabel.setText(_translate("MainWindow", "Volatility, σ"))
+        self.volatilityLabel.setText(_translate("MainWindow", "Volatility, σ"))
         self.volatility.setPlaceholderText(_translate("MainWindow", "26,07%"))
         self.infoText.setPlaceholderText(_translate("MainWindow", "Info about option..."))
-        self.about.setText(_translate("MainWindow", "github.com/tsarkov90"))
         self.divHead.setText(_translate("MainWindow", "Dividend payments"))
         self.inputsHead.setText(_translate("MainWindow", "Inputs"))
         self.calculationsHead.setText(_translate("MainWindow", "Calculations"))
@@ -286,3 +306,5 @@ class Ui_MainWindow(object):
         self.label_4.setText(_translate("MainWindow", "Date"))
         self.label_2.setText(_translate("MainWindow", "Edit / Add payment"))
         self.divPayment.setPlaceholderText(_translate("MainWindow", "$1,52"))
+        self.undHead.setText(_translate("MainWindow", "Underlying type"))
+        
