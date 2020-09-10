@@ -75,10 +75,6 @@ class BS:
 
             return [call, put]
 
-        if self.K == 0:
-            # raise ZeroDivisionError('The strike price cannot be zero')
-            return -999999
-
         call = self.S * norm.cdf(self.d1) - self.pv_K * norm.cdf(self.d2)
         put = -self.S * norm.cdf(-self.d1) + self.pv_K * norm.cdf(-self.d2)
 
@@ -92,10 +88,6 @@ class BS:
 
             return [call, put]
 
-        if self.K == 0:
-            # raise ZeroDivisionError('The strike price cannot be zero')
-            return -999999
-
         call = self.pv_div * norm.cdf(self.d1)
         put = self.pv_div * (norm.cdf(self.d1) - 1)
 
@@ -105,10 +97,6 @@ class BS:
         '''Returns the option vega'''
         if self.sigma == 0 or self.T == 0:
             return 0.0
-
-        if self.K == 0:
-            # raise ZeroDivisionError('The strike price cannot be zero')
-            return -999999
 
         return self.S * norm.pdf(self.d1) * sqrt(self.T) / 100
 
