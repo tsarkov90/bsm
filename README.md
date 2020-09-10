@@ -6,6 +6,7 @@ Also calculates the "Greeks".
 
 Requires the modules `scipy`, `pyqt5` and `pyinstaller`. 
 To install them, enter the command `pip install scipy pyqt5 pyinstaller` in the cmd (Windows) or Terminal (Linux, Mac OS)
-Run `app.py`
+
+Run with `python app.py` in project directory
 
 For desktop version, go to this directory and enter the command `pyinstaller --onefile -w app.py`
